@@ -2,7 +2,7 @@
 
 namespace WebApplication1.DTOs.User
 {
-    public class CreateUserDto
+    public class UpdateUserDto
     {
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
@@ -10,6 +10,5 @@ namespace WebApplication1.DTOs.User
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public int Role { get; set; } = 1;
     }
 }
