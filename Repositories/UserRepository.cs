@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
-using WebApplication1.Entities;
-using WebApplication1.Repositories.Base;
+using Backend.Data;
+using Backend.Entities;
+using Backend.Repositories.Base;
 
-namespace WebApplication1.Repositories
+namespace Backend.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {

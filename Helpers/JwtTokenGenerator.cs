@@ -2,9 +2,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using WebApplication1.Entities;
+using Backend.Entities;
 
-namespace WebApplication1.Helpers
+namespace Backend.Helpers
 {
     public class JwtTokenGenerator
     {

@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Text.Json;
-using WebApplication1.Exceptions;
+using Backend.Exceptions;
 
-namespace WebApplication1.Middlewares
+namespace Backend.Middlewares
 {
     public class ExceptionMiddleware
     {

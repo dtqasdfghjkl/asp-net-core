@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using WebApplication1.Common;
+using Backend.Common;
 
-namespace WebApplication1.Repositories.Base
+namespace Backend.Repositories.Base
 {
     public interface IBaseRepository<T> where T : class
     {

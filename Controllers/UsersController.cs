@@ -9,12 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication1.Data;
-using WebApplication1.DTOs.User;
-using WebApplication1.Entities;
-using WebApplication1.Services;
+using Backend.Data;
+using Backend.DTOs.User;
+using Backend.Entities;
+using Backend.Services;
 
-namespace WebApplication1.Controllers
+namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

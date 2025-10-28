@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using WebApplication1.Data;
+using Backend.Data;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20251028042056_InitialCreate")]
@@ -25,7 +25,7 @@ namespace WebApplication1.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Entities.User", b =>
+            modelBuilder.Entity("Backend.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

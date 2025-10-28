@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using WebApplication1.DTOs.Auth;
-using WebApplication1.DTOs.User;
-using WebApplication1.Entities;
+using Backend.DTOs.Auth;
+using Backend.DTOs.User;
+using Backend.Entities;
 
-namespace WebApplication1.Mappers
+namespace Backend.Mappers
 {
     public class UserProfile : Profile
     {

@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Common
+﻿namespace Backend.Common
 {
     public class PaginatedResult<T>
     {

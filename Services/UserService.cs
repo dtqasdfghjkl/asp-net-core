@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using NuGet.Protocol.Core.Types;
 using System.ComponentModel.DataAnnotations;
-using WebApplication1.DTOs.User;
-using WebApplication1.Entities;
-using WebApplication1.Helpers;
-using WebApplication1.Repositories;
+using Backend.DTOs.User;
+using Backend.Entities;
+using Backend.Helpers;
+using Backend.Repositories;
 
-namespace WebApplication1.Services
+namespace Backend.Services
 {
     public class UserService : IUserService
     {

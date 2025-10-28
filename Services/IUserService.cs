@@ -1,6 +1,6 @@
-﻿using WebApplication1.DTOs.User;
+﻿using Backend.DTOs.User;
 
-namespace WebApplication1.Services
+namespace Backend.Services
 {
     public interface IUserService
     {

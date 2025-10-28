@@ -1,7 +1,7 @@
-﻿using WebApplication1.DTOs.Auth;
-using WebApplication1.DTOs.User;
+﻿using Backend.DTOs.Auth;
+using Backend.DTOs.User;
 
-namespace WebApplication1.Services
+namespace Backend.Services
 {
     public interface IAuthService
     {

@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using WebApplication1.Data;
-using WebApplication1.Middlewares;
-using WebApplication1.Repositories;
-using WebApplication1.Repositories.Base;
-using WebApplication1.Services;
+using Backend.Data;
+using Backend.Middlewares;
+using Backend.Repositories;
+using Backend.Repositories.Base;
+using Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using WebApplication1.DTOs.Auth;
-using WebApplication1.DTOs.User;
-using WebApplication1.Entities;
-using WebApplication1.Exceptions;
-using WebApplication1.Helpers;
-using WebApplication1.Repositories;
+using Backend.DTOs.Auth;
+using Backend.DTOs.User;
+using Backend.Entities;
+using Backend.Exceptions;
+using Backend.Helpers;
+using Backend.Repositories;
 
-namespace WebApplication1.Services
+namespace Backend.Services
 {
     public class AuthService: IAuthService
     {

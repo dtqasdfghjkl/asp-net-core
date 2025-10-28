@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
-using WebApplication1.Common;
-using WebApplication1.Data;
+using Backend.Common;
+using Backend.Data;
 
-namespace WebApplication1.Repositories.Base
+namespace Backend.Repositories.Base
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {

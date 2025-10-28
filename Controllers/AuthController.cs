@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.DTOs.Auth;
-using WebApplication1.Services;
+using Backend.DTOs.Auth;
+using Backend.Services;
 
-namespace WebApplication1.Controllers
+namespace Backend.Controllers
 {
     public class AuthController : ControllerBase
     {
