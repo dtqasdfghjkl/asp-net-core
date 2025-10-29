@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Backend.DTOs.Auth;
 using Backend.Services;
 
 namespace Backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -17,15 +18,27 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var tokenStr = await _authService.LoginAsync(dto);
-            return Ok(new { token = tokenStr });
+            var result = await _authService.LoginAsync(dto);
+
+            if(!result.Success)
+            {
+                return Unauthorized(result);
+            }
+
+            return Ok(result);
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
-            var user = await _authService.RegisterAsync(dto);
-            return CreatedAtAction("Register", new { id = user.Id }, user);
+            var result = await _authService.RegisterAsync(dto);
+
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+
+            return Created(string.Empty, result);
         }
     }
 }

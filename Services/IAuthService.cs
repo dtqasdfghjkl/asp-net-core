@@ -1,11 +1,12 @@
 ﻿using Backend.DTOs.Auth;
+using Backend.DTOs.Common;
 using Backend.DTOs.User;
 
 namespace Backend.Services
 {
     public interface IAuthService
     {
-        Task<string> LoginAsync(LoginDto dto);
-        Task<UserDto> RegisterAsync(RegisterDto dto);
+        Task<ApiResponse<object>> LoginAsync(LoginDto dto);
+        Task<ApiResponse<UserDto>> RegisterAsync(RegisterDto dto);
     }
 }

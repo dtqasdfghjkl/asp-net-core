@@ -1,18 +1,9 @@
-﻿using AutoMapper;
-using Humanizer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Backend.Data;
 using Backend.DTOs.User;
 using Backend.Entities;
 using Backend.Services;
+using Backend.DTOs.Common;
 
 namespace Backend.Controllers
 {
@@ -34,7 +25,7 @@ namespace Backend.Controllers
         {
             IEnumerable<UserDto> users = await _service.GetAllAsync();
 
-            return Ok(users);
+            return Ok(ApiResponse<IEnumerable<UserDto>>.Ok(users));
         }
 
         // GET: api/Users/5
@@ -43,7 +34,7 @@ namespace Backend.Controllers
         {
             var user = await _service.GetByIdAsync(id);
             if (user == null) return NotFound();
-            return Ok(user);
+            return Ok(ApiResponse<UserDto>.Ok(user));
         }
 
         // PUT: api/Users/5
@@ -61,7 +52,7 @@ namespace Backend.Controllers
         public async Task<ActionResult<User>> PostUser(CreateUserDto userDto)
         {
             var created = await _service.CreateAsync(userDto);
-            return CreatedAtAction("GetUser", new { id = created.Id }, created);
+            return CreatedAtAction("GetUser", new { id = created.Id }, ApiResponse<UserDto>.Ok(created));
         }
 
         // DELETE: api/Users/5

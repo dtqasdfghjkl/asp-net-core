@@ -1,6 +1,7 @@
-﻿using System.Net;
-using System.Text.Json;
+﻿using Backend.DTOs.Common;
 using Backend.Exceptions;
+using System.Net;
+using System.Text.Json;
 
 namespace Backend.Middlewares
 {
@@ -33,17 +34,12 @@ namespace Backend.Middlewares
             var statusCode = exception switch
             {
                 ValidationException => HttpStatusCode.BadRequest,
-                UnauthorizedException => HttpStatusCode.Unauthorized,
+                UnauthorizedAccessException => HttpStatusCode.Unauthorized,
                 KeyNotFoundException => HttpStatusCode.NotFound,
                 _ => HttpStatusCode.InternalServerError
             };
 
-            var response = new
-            {
-                status = (int)statusCode,
-                message = exception.Message,
-                timestamp = DateTime.UtcNow
-            };
+            var response = ApiResponse<string>.Fail((int)statusCode, exception.Message);
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;

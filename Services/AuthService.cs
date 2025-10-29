@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Backend.DTOs.Auth;
+using Backend.DTOs.Common;
 using Backend.DTOs.User;
 using Backend.Entities;
 using Backend.Exceptions;
@@ -21,29 +22,29 @@ namespace Backend.Services
             _config = config;
         }
 
-        public async Task<string> LoginAsync(LoginDto dto)
+        public async Task<ApiResponse<object>> LoginAsync(LoginDto dto)
         {
             var user = await _userRepository.GetByEmailAsync(dto.Email);
             if (user == null || !PasswordHasher.VerifyPassword(user.Password, dto.Password))
-                throw new UnauthorizedAccessException("Invalid username or password");
+                return ApiResponse<object>.Fail(StatusCodes.Status401Unauthorized, "Invalid username or password");
 
             var secret = _config["Jwt:Secret"];
-            return JwtTokenGenerator.GenerateToken(user, secret!);
+            return ApiResponse<object>.Ok(new { token = JwtTokenGenerator.GenerateToken(user, secret!) });
         }
 
-        public async Task<UserDto> RegisterAsync(RegisterDto dto)
+        public async Task<ApiResponse<UserDto>> RegisterAsync(RegisterDto dto)
         {
             User? userEmailExist = await _userRepository.GetByEmailAsync(dto.Email);
             if (userEmailExist != null)
             {
-                throw new ValidationException("Email already in use by another user.");
+                return ApiResponse<UserDto>.Fail(StatusCodes.Status400BadRequest, "Email already in use by another user.");
             }
 
             User user = _mapper.Map<User>(dto);
             user.Password = PasswordHasher.HashPassword(dto.Password);
             await _userRepository.Create(user);
 
-            return _mapper.Map<UserDto>(user);
+            return ApiResponse<UserDto>.Ok(_mapper.Map<UserDto>(user));
         }
     }
 }

@@ -1,12 +1,14 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
 using Backend.Data;
+using Backend.DTOs.Common;
 using Backend.Middlewares;
 using Backend.Repositories;
 using Backend.Repositories.Base;
 using Backend.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,23 @@ builder.Services.AddAuthentication("Bearer")
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState
+            .Where(x => x.Value?.Errors.Count > 0)
+            .ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+            );
+
+        var response = ApiResponse<string>.Fail(StatusCodes.Status400BadRequest, "Validation failed", errors);
+
+        return new BadRequestObjectResult(response);
+    };
+});
 
 //Add dependencies
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
