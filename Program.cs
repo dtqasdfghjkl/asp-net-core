@@ -1,5 +1,7 @@
+using Auth.Repositories;
 using Backend.Data;
 using Backend.DTOs.Common;
+using Backend.Entities;
 using Backend.Middlewares;
 using Backend.Repositories;
 using Backend.Repositories.Base;
@@ -58,8 +60,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 //Add dependencies
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserAuthRepository, UserRegisterRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -91,6 +93,8 @@ builder.Services.AddSwaggerGen(c =>
 // Add Auto Mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+Auth.AuthModuleStartup.ConfigureServices(builder.Services);
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
@@ -109,5 +113,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Map module controllers
+Auth.AuthModuleStartup.Configure(app);
 
 app.Run();

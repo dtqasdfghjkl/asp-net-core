@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using NuGet.Protocol.Core.Types;
 using System.ComponentModel.DataAnnotations;
 using Backend.DTOs.User;
 using Backend.Entities;
-using Backend.Helpers;
 using Backend.Repositories;
+using Auth.Helpers;
 
 namespace Backend.Services
 {
